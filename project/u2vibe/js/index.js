@@ -110,7 +110,6 @@ async function makePlaylist() {
      </div>
      <div class="list-contents">0곡</div>`;
     listboard.appendChild(tempElem);
-    console.log("들어오냐");
     mordalroot.classList.add("on");
     listboard.innerHTML = "";
     listDivCreate();
@@ -154,7 +153,6 @@ async function myplaylist() {
     [...tempClick].forEach((item, index) => {
       item.onclick = async (e) => {
         const tempQuery = e.target.parentNode.nextElementSibling.innerText;
-        console.log(tempQuery);
         location.href = `http://localhost:8080/playListIn?${tempQuery}`;
       };
     });

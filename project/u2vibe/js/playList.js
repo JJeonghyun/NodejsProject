@@ -1,4 +1,3 @@
-console.log(`장정현`);
 const album = `i_love`;
 const songName = `Nxde`;
 const singerName = `(여자)아이들`;

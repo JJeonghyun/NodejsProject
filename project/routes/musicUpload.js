@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
 });
 const uploader = multer({ storage: storage });
 
-// delete 테이블
 router.post("/delete", (req, res) => {
   Music.destroy({
     truncate: true,
@@ -25,25 +24,16 @@ router.post("/delete", (req, res) => {
 
 router.get("/upload", async (req, res) => {
   const listUp = await Music.findAll();
-  console.log("listUp");
-  console.log(listUp);
 
   fs.readdir("./upload", (err, data) => {
-    console.log("data : ", data);
     res.send({ list: listUp, data: data });
   });
 });
 
-// multer로 한개의 파일만 업로드 할 때
 // router.post("/upload", uploader.single("img"), (req, res) => {
-//   console.log(req.file);
-//   console.log("파일 업로드");
-//   console.log(req.body);
-
 //   res.send("post ok! ");
 // });
 
-// multer로 서로 다른 name input객체의 파일을 업로드할 때
 router.post(
   "/upload",
   uploader.fields([{ name: "file" }, { name: "img" }]),
@@ -59,7 +49,6 @@ router.post(
         count: 0,
         genre: req.body.formSelect,
       });
-      console.log(tempUpload);
       res.send({
         userId: "jjh",
         musicName: req.body.musicTitle,
@@ -87,8 +76,6 @@ router.post("/addedlist", async (req, res) => {
 });
 
 router.post("/deletelist", async (req, res) => {
-  console.log(req.body.name);
-  console.log(req.body.singer);
   const tempDelete = await Music.destroy({
     where: {
       userId: req.body.id,

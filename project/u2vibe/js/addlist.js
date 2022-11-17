@@ -17,7 +17,6 @@ if (document.cookie) {
     userprofileid.innerText = curuserName;
   }
   document.getElementById("logout-btn").onclick = async function (e) {
-    console.log("로그아웃");
     try {
       await axios.get("/api/user/logout");
     } catch (error) {
@@ -69,7 +68,6 @@ async function makeaddedlist() {
       const tempMusiccontents =
         e.target.parentNode.parentNode.parentNode.parentNode.parentNode
           .nextElementSibling.innerText;
-      console.log("찍고있니");
       await axios.post("/api/musicUpload/deletelist", {
         id: curuserName,
         name: tempMusictitle,

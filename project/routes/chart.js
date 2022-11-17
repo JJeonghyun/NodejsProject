@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const fs = require("fs");
 
-// 음원을 담기 위해 fs으로 폴더 접근해서 data 전송
 router.get("/list", async (req, res) => {
   fs.readdir("./upload", (err, data) => {
     console.log("data : ", data);
@@ -16,21 +15,13 @@ router.get("/imglist", async (req, res) => {
   });
 });
 
-// 배열로 하면 쉽게 가져올 수 있음 근데 db는 배열이 아니니까, 어떻게 가져올지 생각을 해보자.
-// 배열로 들어오는데 안에 요소들이 객체로 들어감
-// 배열에 n번째에서 어떤 객체에서  원하는 요소를 찾는게 필요할 것 같다.
-
 const { Music } = require("../models/index.js");
 
 router.post(`/list`, async (req, res) => {
   const chartUp = await Music.findAll({
     order: [["count", "DESC"]],
   });
-  // 차트에 줄 정보(사용자랑 상관없는것)을 받아오기위해
-  // 차트 db에서 모든걸 다 찾아서 chartUp 변수를 만들어준다.
   res.send({ data: chartUp });
-  // 차트 db에서 찾은것을 프론트 쪽 js로 쏴준다. 형식은
-  // 배열형식으로 오되 안에 내용물은 객체로
 });
 
 router.post(`/userList`, async (req, res) => {
@@ -40,17 +31,10 @@ router.post(`/userList`, async (req, res) => {
       userId: req.body.userId,
     },
   });
-  // 수정할때는 findAll 한것 처럼 여기있는 db에서 그걸 찾고 그걸 수정한다
-  // update임 (destroy처럼)
-  // 이런식으로 문장을 써주면 된다고함.
-  // console.log(userChartOn[0].count + `찾아온거 이것들 맞냐?`);
-  // userChartOn[0].count++;
-  // userChartOn[0].console.log(userChartOn[0].count + `늘어낫냐?`);
   res.send({ data: userChartOn });
 });
 
 router.post(`/count`, async (req, res) => {
-  console.log(`카운트 횟수` + req.body.count, `id` + req.body.id);
   await Music.update(
     { count: req.body.count },
     {
@@ -77,7 +61,6 @@ router.post(`/countUser`, async (req, res) => {
 
 router.post(`/chartNum`, async (req, res) => {
   const chartNum = await Music.findAll();
-  console.logt(chartNum + `차트에서 온건 뭘까`);
   res.send({ data: chartNum });
 });
 

@@ -2,13 +2,7 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const Cryptojs = require("crypto-js");
 
-// const fs = require("fs");
-// const multer = require("multer");
-
 const { User } = require("../models/index.js");
-// DataBase에 User테이블 연동, 연결
-
-// GET / POST / PUT / PATCH / DELETE
 
 router.post("/regist", async (req, res) => {
   try {
@@ -72,8 +66,6 @@ router.post("/login", async (req, res) => {
         name: checkUser.userName,
         logincheck: 1,
       });
-      console.log("로그인 성공");
-
       return;
     }
     res.status(500);

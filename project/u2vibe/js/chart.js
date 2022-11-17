@@ -45,7 +45,6 @@ if (document.cookie) {
     userprofileid.innerText = curuserName;
   }
   document.getElementById("logout-btn").onclick = async function (e) {
-    console.log("로그아웃");
     try {
       await axios.get("/api/user/logout");
     } catch (error) {
@@ -62,8 +61,7 @@ function removeBtn() {
     prev.classList.toggle(`off`);
   }
 }
-// const nextGenre = document.getElementsByClassName(`genre`)[1];
-// const prevGenre = document.getElementsByClassName(`genre`)[0];
+
 function genreremoveBtn() {
   genrePrev.classList.toggle(`off`);
   genreNext.classList.toggle(`off`);
@@ -134,8 +132,6 @@ const slideInnerDiv = document.getElementsByClassName("slide-inner-div");
 async function chartOn() {
   const data = (await axios.post("/api/chart/list")).data;
 
-  console.log(data.data[0].musicFile + `음악의 이름이야`);
-
   const innerImg = document.getElementsByClassName(`slide-inner-img`);
   const innerTitle = document.getElementsByClassName(`slide-inner-title`);
   const innerSinger = document.getElementsByClassName(`slide-inner-singer`);
@@ -150,7 +146,6 @@ async function chartOn() {
     innerIdx[i].innerText = i + 1;
   }
   for (let j = 0; j < data.data.length; j++) {
-    console.log(`살려줘`);
     innerImg[j].onclick = () => {
       data.data[j].count++;
       axios.post(`/api/chart/count`, {
@@ -158,7 +153,6 @@ async function chartOn() {
         id: data.data[j].id,
       });
 
-      // 뮤직 플레이어 쪽에 올리는 부분
       document.getElementsByClassName("container")[0].innerHTML = "";
       let imgDiv = document.createElement("div");
       let tempDiv = document.createElement("div");
@@ -207,7 +201,6 @@ async function userChartOn() {
     innerTitle[i].innerText = data.data[i].musicName;
     innerSinger[i].innerText = data.data[i].singer;
     innerIdx[i].innerText = i + 1;
-    console.log(`${i}번 돌앗어`);
   }
   for (let j = 0; j < data.data.length; j++) {
     innerImg[j].onclick = () => {
@@ -244,11 +237,6 @@ userChartOn();
 
 async function buttonremove() {
   const data = await axios.post("api/chart/chartNum").data;
-
-  // if (data.data.length < 15) {
-  //   genreNext.classList.add(`off`);
-  //   next.classList.add(`off`);
-  // }
 }
 
 buttonremove();

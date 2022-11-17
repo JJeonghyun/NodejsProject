@@ -146,7 +146,6 @@ listUp();
 
 const musicNameInfo = document.getElementById("music-name");
 const singerInfo = document.getElementById("singer-name");
-console.log(musicNameInfo.innerText, singerInfo.innerText);
 
 musicAddBtn.onclick = () => {
   axios
@@ -205,8 +204,6 @@ function commentSaveload() {
           comment:
             document.getElementsByClassName("item-comment")[index].innerText,
         });
-        console.log(resultDel.data);
-
         commentSaveload();
       };
     });
@@ -217,7 +214,7 @@ function commentSaveload() {
 }
 
 commentSaveload();
-// 댓글
+
 userName.innerText = `${userNameElem}님`;
 userName.style.marginLeft = "40px";
 commentList.style.marginTop = "40px";
@@ -232,7 +229,6 @@ commentBtn.onclick = () => {
         comment: commentText.value,
       })
       .then((data) => {
-        console.log(data);
         commentSaveload();
       });
     commentText.value = "";

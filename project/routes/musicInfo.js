@@ -21,13 +21,7 @@ router.post("/musicadd", (req, res) => {
     tempSinger = data.singer;
     tempalbumName = data.albumName;
     tempmusicFile = data.musicFile;
-    // console.log(
-    //   tempImg,
-    //   tempmusicName,
-    //   tempSinger,
-    //   tempalbumName,
-    //   tempmusicFile
-    // );
+
     MusicList.create({
       userId: tempuserId,
       playList: "Now Playlist",
@@ -43,11 +37,7 @@ router.post("/musicadd", (req, res) => {
 
 router.get("/play", async (req, res) => {
   const listUp = await Music.findAll();
-  console.log("listUp");
-  console.log(listUp);
-
   fs.readdir("./upload", (err, data) => {
-    console.log("data : ", data);
     res.send({ list: listUp, data: data });
   });
 });
@@ -63,9 +53,8 @@ router.post("/comment", (req, res) => {
 
 router.get("/", (req, res) => {
   Comment.findAll({
-    order: [["id", "DESC"]], // 정렬
+    order: [["id", "DESC"]],
   }).then((data) => {
-    console.log(data);
     res.send({ list: data });
   });
 });

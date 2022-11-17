@@ -14,7 +14,6 @@ router.post(`/list`, async (req, res) => {
 });
 
 router.post(`/delete`, async (req, res) => {
-  console.log(req.body);
   await MusicList.destroy({
     where: {
       singer: req.body.singer,
