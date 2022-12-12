@@ -25,4 +25,14 @@ router.post(`/delete`, async (req, res) => {
   res.send(`지웟다`);
 });
 
+router.post(`/firstInfo`, async (req, res) => {
+  const firstList = await MusicList.findOne({
+    where: {
+      userId: req.body.userId,
+      playList: req.body.playlistName,
+    },
+  });
+  res.send({ data: firstList });
+});
+
 module.exports = router;

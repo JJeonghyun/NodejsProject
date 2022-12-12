@@ -120,6 +120,10 @@ async function playListInfo() {
     userId: curuserName,
     playlistName: decodeURI(window.location.search.split("?")[1]),
   });
+  const listFirst = await axios.post(`/api/musicList/firstInfo`, {
+    userId: curuserName,
+    playlistName: decodeURI(window.location.search.split("?")[1]),
+  }).data;
   // 유저 id랑 리스트 명으로 찾아서 플레이 리스트를 가져옴
   const playListPage = document.getElementsByClassName(`play-list-page`)[0];
   const playListHeader = document.createElement(`div`);
