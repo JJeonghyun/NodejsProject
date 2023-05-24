@@ -100,7 +100,7 @@ async function makePlayInList() {
   function delFunc() {
     for (let i = 0; i < test1.length; i++) {
       test1[i].onclick = () => {
-        axios.post(`/api/playList/delete`, {
+        axios.post(`/api/musiclist/delete`, {
           singer: document.getElementsByClassName(`singer-name`)[i].innerText,
           musicName: document.getElementsByClassName(`music-name`)[i].innerText,
         }).data;

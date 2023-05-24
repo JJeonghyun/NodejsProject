@@ -26,11 +26,12 @@ router.post("/delete", (req, res) => {
 router.get("/upload", async (req, res) => {
   const listUp = await Music.findAll();
   console.log("listUp");
-  console.log(listUp);
+  console.log(listUp); // 디비 정보 가져옴 router.get
 
   fs.readdir("./upload", (err, data) => {
     console.log("data : ", data);
-    res.send({ list: listUp, data: data });
+    res.send({ list: listUp, data: data }); // list는 디비안에서 가져온 데이터 배열,
+    //data는 fs로 읽어온 multer로 지정된 경로에서 읽어온 데이터
   });
 });
 
